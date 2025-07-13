@@ -1,0 +1,313 @@
+/* General page styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevents horizontal scroll on small screens */
+}
+
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Change from center to stretch */
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+
+/* Navbar styles */
+.navbar {
+  background-color: #3498db;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #e0e0e0;
+}
+
+.clerk-user-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.clerk-user-button:hover {
+  color: #e0e0e0;
+}
+
+/* 1. Layout Fix */
+.form-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.record-form {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* 3. Set proper widths for form panels */
+.left-form,
+.right-preview {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* 4. OCR preview box and receipt image */
+.receipt-preview {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.ocr-debug-box {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.form-submit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* 2. Organize form sections horizontally */
+.form-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* 5. Center the button */
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* 6. Avoid stretched buttons */
+.button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background-color: #2f89c5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .record-form {
+    flex-direction: column;
+  }
+
+  .form-left,
+  .form-right {
+    width: 100%;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #2f89c5;
+}
+
+.record-form {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+}
+
+.form-columns {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.left-form {
+  flex: 1;
+  min-width: 250px;
+}
+
+.right-preview {
+  flex: 1;
+  min-width: 250px;
+}
+
+.receipt-preview {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-columns {
+    flex-direction: column;
+  }
+
+  .left-form,
+  .right-preview {
+    width: 100%;
+    flex: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+
+  .navbar a {
+    margin: 0.5rem 0;
+  }
+
+    .form-container {
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  .record-form {
+    padding: 1rem;
+  }
+
+  .center-button {
+    justify-content: center;
+  }
+}
+
+
+.ocr-debug-box {
+  margin-top: 1rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+/* Mobile & tablet responsive adjustments */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+
+  .navbar a {
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-container {
+    padding: 1rem;
+  }
+
+  .input,
+  .button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar a {
+    font-size: 0.95rem;
+  }
+}

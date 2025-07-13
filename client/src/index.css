@@ -1,0 +1,57 @@
+/* Layout container */
+.app-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.navbar a {
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+/* Form container */
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form field spacing */
+.form-field {
+  margin-bottom: 1rem;
+}
+
+/* Responsive inputs */
+.input,
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Button full width on small screens */
+@media screen and (max-width: 600px) {
+  .button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+}
