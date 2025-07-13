@@ -31,7 +31,7 @@ export const BillUpload: React.FC<BillUploadProps> = ({ onUploadSuccess }) => {
 
     const url = response.data.secure_url;
     console.log("✅ Uploaded image URL:", url); 
-    setPreviewUrl(url);
+ //   setPreviewUrl(url);
     onUploadSuccess(url);
   } catch (error) {
     console.error("Upload failed:", error);
