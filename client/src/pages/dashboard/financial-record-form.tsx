@@ -10,7 +10,7 @@ export const FinancialRecodeFrom = () => {
   const [category, setCategory] = useState<string>("");
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const [receiptUrl, setReceiptUrl] = useState<string | null>(null);
-  const [uploading, setUploading] = useState<boolean>(false); // ← to disable form while OCR runs
+  const [uploading] = useState<boolean>(false); // ← to disable form while OCR runs
 
   const { addRecord } = useFinancialRecords();
   const { user } = useUser();

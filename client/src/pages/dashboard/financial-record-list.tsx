@@ -71,8 +71,8 @@ export  const FinancialRecodeList = () => {
         },
         {
             Header: "Receipt",
-            accessor: "receiptUrl",
-            Cell: ({ value }) =>
+            accessorKey: "receiptUrl",
+            Cell: ({ value }: { value: string }) =>
             value ? (
             <a href={value} target="_blank" rel="noopener noreferrer">
                 <img

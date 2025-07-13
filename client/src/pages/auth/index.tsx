@@ -1,4 +1,4 @@
-import {SignedIn, SignedOut, SignInButton, SignUpButton, UserButton} from '@clerk/clerk-react'
+import {SignedIn, SignedOut, SignInButton, SignUpButton} from '@clerk/clerk-react'
 import {Navigate} from 'react-router-dom';
 
 export const Auth = () => {

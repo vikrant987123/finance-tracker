@@ -11,7 +11,7 @@ const UPLOAD_PRESET = "upload_preset"; // ✅ match the actual preset name from 
 
 export const BillUpload: React.FC<BillUploadProps> = ({ onUploadSuccess }) => {
   const [uploading, setUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  //const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];
