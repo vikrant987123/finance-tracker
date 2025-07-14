@@ -22,6 +22,11 @@ app.use(cors({
   credentials: true,
 }));
 
+app.get("/", (req, res) => {
+  res.send("✅ Finance Tracker Backend is live!");
+});
+
+
 const mongoURI: string = "mongodb+srv://vermabackup213:i9NxWZMfntCkaYBI@personalfinancetracker.uhaogic.mongodb.net/";
 
 mongoose
