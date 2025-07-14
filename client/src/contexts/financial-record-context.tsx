@@ -22,6 +22,8 @@ interface FinancialRecordsContextType {
 
 const FinancialRecordsContext = createContext<FinancialRecordsContextType | undefined>(undefined);
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const FinancialRecordsProvider = ({ children }: { children: React.ReactNode }) => {
   const [records, setRecords] = useState<FinancialRecord[]>([]);
   const { user } = useUser();
@@ -30,7 +32,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
   const fetchRecords = async () => {
     if (!userId) return;
 
-    const response = await fetch(`http://localhost:3001/financial-records/getAllbyUserID/${userId}`);
+    const response = await fetch(`${BASE_URL}/financial-records/getAllbyUserID/${userId}`);
 
     if (response.ok) {
       const records = await response.json();

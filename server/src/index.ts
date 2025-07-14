@@ -11,7 +11,16 @@ const app: Express = express();
 const port = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = [
+  "http://localhost:5173", // dev
+  "https://finance-tracker-sck8.vercel.app", // deployed frontend
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 const mongoURI: string = "mongodb+srv://vermabackup213:i9NxWZMfntCkaYBI@personalfinancetracker.uhaogic.mongodb.net/";
 
