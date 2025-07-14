@@ -6,6 +6,8 @@ import "./financial-record.css"
 import { useFinancialRecords } from '../../contexts/financial-record-context';
 //import { BillUpload } from "../../components/BillUpload";
 import { useMemo } from 'react';
+import { SignInButton, SignUpButton } from "@clerk/clerk-react";
+
 
 export const Dashboard = () => {
 
@@ -24,6 +26,17 @@ export const Dashboard = () => {
     return (
         <div className="dashboard_container"> 
             <h1> Welcome {user?.firstName}! here are your finances:</h1>
+
+            <SignInButton mode="modal">
+                <button className="button">Sign In</button>
+            </SignInButton>
+
+            <SignUpButton mode="modal">
+                <button className="button" style={{ marginLeft: "1rem" }}>
+                Sign Up
+                </button>
+            </SignUpButton>
+
             <FinancialRecodeFrom/>
             {/* <BillUpload /> */}
             <div>Total Monthly: ${totalMonthly}</div>
