@@ -10,17 +10,12 @@ import cors from "cors";
 const app: Express = express();
 const port = process.env.PORT || 3001;
 
-app.use(express.json());
-
-const allowedOrigins = [
-  "http://localhost:5173", // dev
-  "https://finance-tracker-sck8.vercel.app", // deployed frontend
-];
-
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
+  origin: "https://finance-tracker-sck8.vercel.app", // Your Vercel frontend
+  credentials: true, // if using cookies or Clerk
 }));
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("✅ Finance Tracker Backend is live!");

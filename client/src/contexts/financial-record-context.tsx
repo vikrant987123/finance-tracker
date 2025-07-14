@@ -11,6 +11,7 @@ export interface FinancialRecord {
   amount: number;
   category: string;
   paymentMethod: string;
+  receiptUrl?: string;
 }
 
 interface FinancialRecordsContextType {
@@ -43,8 +44,11 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
   };
 
   useEffect(() => {
+  if (user?.id) {
     fetchRecords();
-  }, [userId]);
+  }
+}, [user?.id]);
+
 
   const addRecord = async (record: Omit<FinancialRecord, "userId">) => {
     if (!userId) {
@@ -55,7 +59,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
     const fullRecord = { ...record, userId };
 
     try {
-      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
+      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fullRecord),
@@ -78,7 +82,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
   const updateRecord = async (id: string, updatedData: Partial<FinancialRecord>) => {
   try {
-    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
+    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -102,7 +106,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
   const deleteRecord = async (id: string) => {
     try {
-      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
+      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/delete/${id}`, {
         method: "DELETE",
       });
 

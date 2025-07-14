@@ -71,19 +71,21 @@ export  const FinancialRecodeList = () => {
         },
         {
             Header: "Receipt",
-            accessorKey: "receiptUrl",
-            Cell: ({ value }: { value: string }) =>
-            value ? (
-            <a href={value} target="_blank" rel="noopener noreferrer">
-                <img
-                src={value}
-                alt="Receipt"
-                style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "4px" }}
-                />
-            </a>
-            ) : (
-            "No receipt"
-            ),
+            accessor: "receiptUrl",
+            Cell: (props: CellProps<FinancialRecord>) => {
+                const value = props.value;
+                return value ? (
+                <a href={value} target="_blank" rel="noopener noreferrer">
+                    <img
+                    src={value}
+                    alt="Receipt"
+                    style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "4px" }}
+                    />
+                </a>
+                ) : (
+                "No receipt"
+                );
+            }
         },
 
         {
