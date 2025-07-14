@@ -32,7 +32,8 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
   const fetchRecords = async () => {
     if (!userId) return;
 
-    const response = await fetch(`${BASE_URL}/financial-records/getAllbyUserID/${userId}`);
+    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`);
+
 
     if (response.ok) {
       const records = await response.json();
@@ -54,7 +55,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
     const fullRecord = { ...record, userId };
 
     try {
-      const response = await fetch("http://localhost:3001/financial-records", {
+      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fullRecord),
@@ -77,7 +78,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
   const updateRecord = async (id: string, updatedData: Partial<FinancialRecord>) => {
   try {
-    const response = await fetch(`http://localhost:3001/financial-records/${id}`, {
+    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -101,7 +102,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
   const deleteRecord = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3001/financial-records/${id}`, {
+      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`, {
         method: "DELETE",
       });
 
