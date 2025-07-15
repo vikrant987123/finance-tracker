@@ -37,20 +37,22 @@ router.post("/", async (req: Request, res: Response) => {
 
     const newRecord = new FinancialRecordModel({
       userId,
-      date,
+      date: new Date(date), // Ensure date is parsed
       description,
       amount,
       category,
       paymentMethod,
-      receiptUrl: uploadedImageUrl, // Add new field
+      receiptUrl: uploadedImageUrl, // Optional receipt field
     });
 
     const savedRecord = await newRecord.save();
     res.status(201).send(savedRecord);
   } catch (err) {
-    res.status(500).send(err);
+    console.error("POST /financial-records error:", err);
+    res.status(500).json({ error: "Server error", details: err });
   }
 });
+
 
 
 // PUT to update a record by ID
