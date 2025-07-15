@@ -57,7 +57,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
       return;
     }
 
-    const fullRecord = { ...record, userId };
+    const fullRecord = { ...record, userId, receiptImage: record.receiptUrl ?? "", };
 
     try {
       const response = await fetch("https://finance-tracker-w5gh.onrender.com/financial-records", {
