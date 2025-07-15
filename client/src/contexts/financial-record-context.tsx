@@ -30,24 +30,25 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
   const { user } = useUser();
   const userId = user?.id;
 
-  const fetchRecords = async () => {
-    if (!userId) return;
-
-    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${userId}`);
-
-
-    if (response.ok) {
-      const records = await response.json();
-      console.log(records);
-      setRecords(records);
-    }
-  };
-
   useEffect(() => {
-  if (user?.id) {
+    const fetchRecords = async () => {
+      if (!user?.id) return;
+
+      try {
+        const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/getAllbyUserID/${user.id}`);
+        if (!response.ok) throw new Error("Failed to fetch records");
+
+        const records = await response.json();
+        console.log("📥 Records fetched:", records);
+        setRecords(records);
+      } catch (err) {
+        console.error("❌ Error fetching records:", err);
+      }
+    };
+
     fetchRecords();
-  }
-}, [user?.id]);
+  }, [user?.id]);
+
 
 
   const addRecord = async (record: Omit<FinancialRecord, "userId">) => {
