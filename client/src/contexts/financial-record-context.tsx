@@ -83,7 +83,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
   const updateRecord = async (id: string, updatedData: Partial<FinancialRecord>) => {
   try {
-    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/update/${id}`, {
+    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedData),
@@ -105,24 +105,25 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 };
 
 
+
   const deleteRecord = async (id: string) => {
-    try {
-      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/delete/${id}`, {
-        method: "DELETE",
-      });
+  try {
+    const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/${id}`, {
+      method: "DELETE",
+    });
 
-      if (!response.ok) {
-        toast.error("Delete failed");
-        throw new Error(await response.text());
-      }
-
-      setRecords((prev) => prev.filter((r) => r._id !== id));
-      toast.success("Record deleted!");
-
-    } catch (err) {
-      console.error("Delete record failed:", err);
+    if (!response.ok) {
+      toast.error("Delete failed");
+      throw new Error(await response.text());
     }
-  };
+
+    setRecords((prev) => prev.filter((r) => r._id !== id));
+    toast.success("Record deleted!");
+  } catch (err) {
+    console.error("Delete record failed:", err);
+  }
+};
+
 
   return (
     <FinancialRecordsContext.Provider value={{ records, addRecord, updateRecord, deleteRecord }}>
