@@ -42,7 +42,7 @@ router.post("/", async (req: Request, res: Response) => {
       amount,
       category,
       paymentMethod,
-      receiptUrl: uploadedImageUrl, // Optional receipt field
+      ...(uploadedImageUrl && { receiptUrl: uploadedImageUrl }), // ✅ Only include if present
     });
 
     const savedRecord = await newRecord.save();
