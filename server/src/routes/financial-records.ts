@@ -24,15 +24,17 @@ router.get("/getAllbyUserID/:userId", async (req: Request, res: Response) => {
 // POST a new record
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { userId, date, description, amount, category, paymentMethod, receiptImage } = req.body;
+    const { userId, date, description, amount, category, paymentMethod, receiptImage, receiptUrl} = req.body;
 
     let uploadedImageUrl = "";
 
-    if (receiptImage) {
+    if (receiptImage && receiptImage.startsWith("data:")) {
       const uploadResponse = await cloudinary.uploader.upload(receiptImage, {
         folder: "receipts",
       });
       uploadedImageUrl = uploadResponse.secure_url;
+    } else if (receiptUrl) {
+        uploadedImageUrl = receiptUrl; // ✅ Already hosted
     }
 
     const newRecord = new FinancialRecordModel({
@@ -42,7 +44,7 @@ router.post("/", async (req: Request, res: Response) => {
       amount,
       category,
       paymentMethod,
-      ...(uploadedImageUrl && { receiptUrl: uploadedImageUrl }), // ✅ Only include if present
+      receiptUrl: uploadedImageUrl,
     });
 
     const savedRecord = await newRecord.save();
