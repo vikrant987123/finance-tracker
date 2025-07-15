@@ -11,8 +11,8 @@ const app: Express = express();
 const port = process.env.PORT || 3001;
 
 app.use(cors({
-  origin: "https://finance-tracker-sck8.vercel.app", // Your Vercel frontend
-  credentials: true, // if using cookies or Clerk
+  origin: "https://finance-tracker-theta-eight.vercel.app",
+  credentials: true,
 }));
 
 app.use(express.json());
