@@ -61,7 +61,7 @@ export const FinancialRecodeFrom = () => {
       amount: parseFloat(amount),
       category,
       paymentMethod,
-      receiptImage: receiptUrl ?? undefined,
+      receiptImage: receiptUrl ?? "",
     };
 
     console.log("🚀 Submitting new record:", newRecord);
