@@ -59,7 +59,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
     const fullRecord = { ...record, userId };
 
     try {
-      const response = await fetch(`https://finance-tracker-w5gh.onrender.com/financial-records/add`, {
+      const response = await fetch("https://finance-tracker-w5gh.onrender.com/financial-records/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fullRecord),
