@@ -1,15 +1,12 @@
-//passMongoDB: i9NxWZMfntCkaYBI
-//userNameMongoDB: vermabackup213
-//connection: mongodb+srv://vermabackup213:i9NxWZMfntCkaYBI@personalfinancetracker.uhaogic.mongodb.net/
-
 import express, { Express } from 'express';
 import mongoose from 'mongoose';
-import financialRecordRouter from './routes/financial-records'
+import financialRecordRouter from './routes/financial-records';
 import cors from "cors";
 
 const app: Express = express();
 const port = process.env.PORT || 3001;
 
+// ✅ Allow CORS from frontend
 app.use(cors({
   origin: "https://finance-tracker-theta-eight.vercel.app",
   credentials: true,
@@ -17,24 +14,27 @@ app.use(cors({
 
 app.use(express.json());
 
+// ✅ Root route for testing
 app.get("/", (req, res) => {
   res.send("✅ Finance Tracker Backend is live!");
 });
 
+// ✅ FIX 1: Added database name at the end → /financeDB
+const mongoURI: string = "mongodb+srv://vermabackup213:i9NxWZMfntCkaYBI@personalfinancetracker.uhaogic.mongodb.net/financeDB";
 
-const mongoURI: string = "mongodb+srv://vermabackup213:i9NxWZMfntCkaYBI@personalfinancetracker.uhaogic.mongodb.net/";
+// ✅ FIX 2: Connect to DB, THEN start server
+mongoose.connect(mongoURI)
+  .then(() => {
+    console.log("✅ Connected to MongoDB");
 
-mongoose
-    .connect(mongoURI)
-    .then(() => console.log("CONNNECTED TO MONGDB!"))
-    .catch((err) => console.log("Failed to connect to mongoDB", err));
+    // ✅ Only start server after DB is ready
+    app.listen(port, () => {
+      console.log(`🚀 Server running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ Failed to connect to MongoDB:", err);
+  });
 
-mongoose.connection.once("open", () => {
-  console.log("📦 Connected to DB:", mongoose.connection.db?.databaseName);
-});    
-
+// ✅ Mount route
 app.use("/financial-records", financialRecordRouter);
-
-app.listen(port, () => {
-    console.log(`Server Running on Port ${port}`);
-});
