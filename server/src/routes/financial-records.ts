@@ -47,10 +47,13 @@ router.post("/", async (req: Request, res: Response) => {
 
     const savedRecord = await newRecord.save();
     res.status(201).send(savedRecord);
-  } catch (err) {
-    console.error("POST /financial-records error:", err);
-    res.status(500).json({ error: "Server error", details: err });
-  }
+  } catch (err: any) {
+        console.error("❌ POST /financial-records error:", err.message || err);
+        res.status(500).json({
+            error: "Server error",
+            details: err.message || err,
+        });
+    }   
 });
 
 
