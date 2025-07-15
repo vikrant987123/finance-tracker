@@ -23,25 +23,6 @@ router.get("/getAllbyUserID/:userId", async (req: Request, res: Response) => {
 
 // POST a new record
 router.post("/", async (req: Request, res: Response) => {
-    try {
-        console.log("Incoming body:", req.body);
-
-        // 👇 Parse the date string to a Date object
-        const body = {
-            ...req.body,
-            date: new Date(req.body.date),
-        };
-
-        const newRecord = new FinancialRecordModel(body);
-        const savedRecord = await newRecord.save();
-        res.status(201).send(savedRecord);
-    } catch (err) {
-        console.error("POST /financial-records error:", err);
-        res.status(500).json({ error: "Server error", details: err });
-    }
-});
-
-router.post("/", async (req: Request, res: Response) => {
   try {
     const { userId, date, description, amount, category, paymentMethod, receiptImage } = req.body;
 
