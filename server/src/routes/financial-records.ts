@@ -24,16 +24,7 @@ router.get("/getAllbyUserID/:userId", async (req: Request, res: Response) => {
 // POST a new record
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { userId, date, description, amount, category, paymentMethod, receiptImage} = req.body;
-
-    let uploadedImageUrl = "";
-
-    if (receiptImage) {
-      const uploadResponse = await cloudinary.uploader.upload(receiptImage, {
-        folder: "receipts",
-      });
-      uploadedImageUrl = uploadResponse.secure_url;
-    }
+    const { userId, date, description, amount, category, paymentMethod, receiptUrl} = req.body;
 
     const newRecord = new FinancialRecordModel({
       userId,
@@ -42,7 +33,7 @@ router.post("/", async (req: Request, res: Response) => {
       amount,
       category,
       paymentMethod,
-      receiptUrl: uploadedImageUrl,
+      receiptUrl,
     });
 
     const savedRecord = await newRecord.save();
