@@ -14,10 +14,10 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard_container">
-      <h1>
+      <h1 style={{ textAlign: "center" }}>
         {user?.firstName 
         ? `Welcome ${user.firstName}! Here are your finances:` 
-        : "👋 Welcome! Please sign in to start tracking your finances."}
+        : "Welcome! Please sign in to start tracking your finances."}
       </h1>
 
 
