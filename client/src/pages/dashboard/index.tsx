@@ -14,9 +14,12 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard_container">
-      <h1 style={{ textAlign: "center" }}>
-        Welcome {user?.firstName || "Guest"}! Here are your finances:
+      <h1>
+        {user?.firstName 
+        ? `Welcome ${user.firstName}! Here are your finances:` 
+        : "👋 Welcome! Please sign in to start tracking your finances."}
       </h1>
+
 
       {/* 🧠 Show Sign In/Up only when user is not logged in */}
       {!user && (
