@@ -1,15 +1,13 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Dashboard } from './pages/dashboard';
-import { useUser, SignedIn, UserButton } from '@clerk/clerk-react';
+import { SignedIn, UserButton } from '@clerk/clerk-react';
 import { Auth } from './pages/auth';
 import { FinancialRecordsProvider } from './contexts/financial-record-context';
 import { Toaster } from "react-hot-toast";
 
 
 function App() {
-  const {user} = useUser();
-
   return (
     <>
     <Toaster position="top-right" reverseOrder={false} />
@@ -18,8 +16,7 @@ function App() {
         <div className='navbar'>
           <Link to="/"> Dashboard </Link>
           <SignedIn>
-            <span style={{ marginRight: "1rem" }}>Hi, {user?.firstName} 👋</span>
-            <UserButton />
+            <UserButton/>
           </SignedIn> 
         </div>
         <Routes>
