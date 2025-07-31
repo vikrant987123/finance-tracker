@@ -25,15 +25,20 @@ export const Dashboard = () => {
 
       {!user ? (
         <>
-          <SignInButton mode="modal">
-            <button className="button">Sign In</button>
-          </SignInButton>
+          {!user && (
+            <div style={{ marginBottom: "1rem" }}>
+                <SignInButton mode="modal">
+                <button className="button">Sign In</button>
+                </SignInButton>
 
-          <SignUpButton mode="modal">
-            <button className="button" style={{ marginLeft: "1rem" }}>
-              Sign Up
-            </button>
-          </SignUpButton>
+                <SignUpButton mode="modal">
+                <button className="button" style={{ marginLeft: "1rem" }}>
+                    Sign Up
+                </button>
+                </SignUpButton>
+            </div>
+           )}  
+
         </>
       ) : (
         <div style={{ position: "absolute", top: "1rem", right: "1rem" }}>
