@@ -13,7 +13,7 @@ export const Dashboard = () => {
   }, [records]);
 
   return (
-    <div className="dashboard_container">
+    <div className="dashboard-container">
       <h1 style={{ textAlign: "center" }}>
         {user?.firstName 
         ? `Welcome ${user.firstName}! Here are your finances:` 

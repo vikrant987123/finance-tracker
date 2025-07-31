@@ -1,9 +1,10 @@
 /* Centered container for the app */
-.dashboard_container {
+.dashboard-container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 /* General styling for headers within the app */
