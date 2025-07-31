@@ -24,15 +24,17 @@ export const Dashboard = () => {
       {/* 🧠 Show Sign In/Up only when user is not logged in */}
       {!user && (
         <>
-          <SignInButton mode="modal">
-            <button className="button">Sign In</button>
-          </SignInButton>
+          {!user && (
+            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", margin: "1rem 0" }}>
+                <SignInButton mode="modal">
+                <button className="button">Sign In</button>
+                </SignInButton>
 
-          <SignUpButton mode="modal">
-            <button className="button" style={{ marginLeft: "1rem" }}>
-              Sign Up
-            </button>
-          </SignUpButton>
+                <SignUpButton mode="modal">
+                <button className="button">Sign Up</button>
+                </SignUpButton>
+            </div>
+            )}
         </>
       )}
 
