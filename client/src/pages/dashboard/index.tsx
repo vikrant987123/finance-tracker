@@ -3,6 +3,8 @@ import { FinancialRecodeFrom } from './financial-record-form';
 import { FinancialRecodeList } from './financial-record-list';
 import { useFinancialRecords } from '../../contexts/financial-record-context';
 import { useMemo } from 'react';
+import './financial-record.css';
+
 
 export const Dashboard = () => {
   const { user } = useUser();
@@ -13,38 +15,28 @@ export const Dashboard = () => {
   }, [records]);
 
   return (
-    <div className="dashboard-container">
-      <h1 style={{ textAlign: "center" }}>
-        {user?.firstName 
-        ? `Welcome ${user.firstName}! Here are your finances:` 
-        : "Welcome! Please sign in to start tracking your finances."}
-      </h1>
-
-
-      {/* 🧠 Show Sign In/Up only when user is not logged in */}
+    <div className="dashboard_container">
+      <h1>Welcome {user?.firstName || "Guest"}! {user ? "Here are your finances:" : "Please sign in to start tracking your finances."}</h1>
+      
       {!user && (
-        <>
-          {!user && (
-            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", margin: "1rem 0" }}>
-                <SignInButton mode="modal">
-                <button className="button">Sign In</button>
-                </SignInButton>
-
-                <SignUpButton mode="modal">
-                <button className="button">Sign Up</button>
-                </SignUpButton>
-            </div>
-            )}
-        </>
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <SignInButton mode="modal">
+            <button className="button">Sign In</button>
+          </SignInButton>
+          <SignUpButton mode="modal">
+            <button className="button" style={{ marginLeft: "1rem" }}>Sign Up</button>
+          </SignUpButton>
+        </div>
       )}
 
       {user && (
         <>
           <FinancialRecodeFrom />
-          <div>Total Monthly: ₹{totalMonthly}</div>
+          <div>Total Monthly: ${totalMonthly}</div>
           <FinancialRecodeList />
         </>
       )}
     </div>
+
   );
 };

@@ -1,12 +1,10 @@
 /* Centered container for the app */
-.dashboard-container {
+/* General layout fix */
+.dashboard_container {
   width: 90%;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  box-sizing: border-box;
 }
-
 /* General styling for headers within the app */
 h1,
 h2 {
@@ -70,38 +68,38 @@ label {
 }
 
 .table-container {
-  width: 100%;
+  margin-top: 20px;
   overflow-x: auto;
-  padding: 10px;
-  box-sizing: border-box;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-
-.table-container {
+/* Table layout */
+.table {
   width: 100%;
-  overflow-x: auto;
-  padding: 10px;
-  box-sizing: border-box;
+  border-collapse: collapse;
+  font-size: 14px;
 }
-
 
 .table th,
 .table td {
-  padding: 12px 15px;
-  border: 1px solid #ddd; /* Light grey border for cells */
+  padding: 10px 14px;
   text-align: left;
+  border: 1px solid #ddd;
 }
 
 .table th {
-  background-color: #3498db; /* Darker blue header background */
+  background-color: #3498db;
   color: white;
-  font-size: 16px;
 }
 
-.table tbody tr:nth-child(odd) {
-  background-color: #f2f2f2; /* Zebra striping for rows, light grey */
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
 .table tbody tr:hover {
-  background-color: #e8f4f8; /* Light blue hover effect for rows */
+  background-color: #eef5fb;
 }
