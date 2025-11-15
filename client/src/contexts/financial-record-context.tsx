@@ -64,8 +64,8 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
         if (fallback.amount !== undefined) body.amount = fallback.amount;
       }
 
-      // const res = await fetch(`https://finance-tracker-w5gh.onrender.com/api/ai/categorize`, {
-      const res = await fetch(`http://localhost:5000/api/ai/categorize`, {
+      const res = await fetch(`https://finance-tracker-w5gh.onrender.com/api/ai/categorize`, {
+      // const res = await fetch(`http://localhost:5000/api/ai/categorize`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
