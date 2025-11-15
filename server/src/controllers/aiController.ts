@@ -3,16 +3,16 @@ import { Request, Response } from "express";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-// NOTE: using @google/genai SDK import style shown earlier.
-// If your SDK install/export differs, adjust imports accordingly.
-import { GoogleGenAI } from "@google/genai";
+// ✅ FIXED: Correct package and class name
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
   console.warn("GEMINI_API_KEY not set — AI endpoints will fail until configured.");
 }
 
-const ai = new GoogleGenAI({ apiKey });
+// ✅ FIXED: Correct class instantiation
+const ai = new GoogleGenerativeAI(apiKey || "");
 
 type AiRequestBody = {
   ocrText?: string;
@@ -81,7 +81,7 @@ total: ${total ?? null}
 END OF PROMPT
 `.trim();
 
-    const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+    const model = process.env.GEMINI_MODEL ?? "gemini-2.0-flash-exp";
 
     // TEST MODE: don't call provider; return conservative mock
     if (process.env.AI_TEST_MODE === "1") {
@@ -106,23 +106,11 @@ END OF PROMPT
       return res.json({ ok: true, ai: mock, raw: { mock: true } });
     }
 
-    // call provider via SDK
-    const response = await ai.models.generateContent({
-      model,
-      contents: [
-        {
-          parts: [{ text: prompt }],
-        },
-      ],
-      // If SDK accepts parameters like temperature / max tokens, pass them in options:
-      // temperature: 0.0,
-      // max_output_tokens: 512,
-    });
-
-    // extract text from provider response (SDK shapes vary)
-    const rawText =
-      (response && ((response as any).text ?? (response as any)?.candidates?.[0]?.content?.parts?.[0]?.text)) ||
-      JSON.stringify(response);
+    // ✅ FIXED: Correct API call using GoogleGenerativeAI SDK
+    const generativeModel = ai.getGenerativeModel({ model });
+    const result = await generativeModel.generateContent(prompt);
+    const response = await result.response;
+    const rawText = response.text();
 
     // Attempt to parse JSON directly
     let aiJson: any = null;
