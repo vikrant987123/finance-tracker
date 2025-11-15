@@ -25,7 +25,7 @@ const EditableCell: React.FC<EditableCellProps> = ({value: initialValue, row, co
 }
 
 
-export  const FinancialRecodeList = () => {
+export  const FinancialRecordList = () => {
 
     const { records, updateRecord, deleteRecord } = useFinancialRecords();
     const updateCellRecord = (rowIndex: number, columnId: string, value: any) => {

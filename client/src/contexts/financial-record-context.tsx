@@ -19,6 +19,7 @@ interface FinancialRecordsContextType {
   addRecord: (record: Omit<FinancialRecord, "userId">) => void;
   updateRecord: (id: string, updated: Partial<FinancialRecord>) => void;
   deleteRecord: (id: string) => void;
+  categorizeReceipt: (ocrText: string, fallback?: { description?: string; amount?: number }) => Promise<any | null>;
 }
 
 const FinancialRecordsContext = createContext<FinancialRecordsContextType | undefined>(undefined);
@@ -49,7 +50,40 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
     fetchRecords();
   }, [user?.id]);
 
+   // ---------- AI Categorization helper ----------
+  const categorizeReceipt = async (
+    ocrText: string,
+    fallback?: { description?: string; amount?: number }
+  ): Promise<any | null> => {
+    try {
+      // prefer sending ocrText when present, otherwise send description+amount
+      const body: Record<string, any> = {};
+      if (ocrText) body.ocrText = ocrText;
+      if (!ocrText && fallback) {
+        if (fallback.description) body.description = fallback.description;
+        if (fallback.amount !== undefined) body.amount = fallback.amount;
+      }
 
+      // const res = await fetch(`https://finance-tracker-w5gh.onrender.com/api/ai/categorize`, {
+      const res = await fetch(`http://localhost:5000/api/ai/categorize`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const errText = await res.text().catch(() => "");
+        console.error("AI categorize failed:", res.status, errText);
+        return null;
+      }
+
+      const data = await res.json();
+      return data; // expected shape: { ok, ai, raw } based on server
+    } catch (err) {
+      console.error("Network/AI categorize error:", err);
+      return null;
+    }
+  };
 
   const addRecord = async (record: Omit<FinancialRecord, "userId">) => {
     if (!userId) {
@@ -126,7 +160,7 @@ export const FinancialRecordsProvider = ({ children }: { children: React.ReactNo
 
 
   return (
-    <FinancialRecordsContext.Provider value={{ records, addRecord, updateRecord, deleteRecord }}>
+    <FinancialRecordsContext.Provider value={{ records, addRecord, updateRecord, deleteRecord, categorizeReceipt }}>
       {children}
     </FinancialRecordsContext.Provider>
   );

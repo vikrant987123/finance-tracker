@@ -1,6 +1,6 @@
 import { useUser, SignInButton, SignUpButton } from "@clerk/clerk-react";
-import { FinancialRecodeFrom } from './financial-record-form';
-import { FinancialRecodeList } from './financial-record-list';
+import { FinancialRecordForm } from './financial-record-form';
+import { FinancialRecordList } from './financial-record-list';
 import { useFinancialRecords } from '../../contexts/financial-record-context';
 import { useMemo } from 'react';
 import './financial-record.css';
@@ -31,9 +31,9 @@ export const Dashboard = () => {
 
       {user && (
         <>
-          <FinancialRecodeFrom />
+          <FinancialRecordForm />
           <div>Total Monthly: ${totalMonthly}</div>
-          <FinancialRecodeList />
+          <FinancialRecordList />
         </>
       )}
     </div>
